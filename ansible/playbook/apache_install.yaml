@@ -1,0 +1,41 @@
+---
+
+  - hosts: all
+    become: true
+    tasks:
+
+    - name: Debian&Ubuntu apt update calistirir
+      apt:
+        update_cache: yes
+        cache_valid_time: 86400
+      when: ansible_distribution == "Ubuntu"
+
+    - name: Redhat&Rocky dnf update calistirir
+      yum:
+        update_cache: yes
+        #cache_valid_time: 86400
+      when: ansible_distribution == "Rocky"
+
+    - name: Debian&Ubuntu apache2 paketini yukler.
+      apt:
+        name: apache2
+        state: latest
+      when: ansible_distribution == "Ubuntu"
+
+    - name: Redhat&Rocky httpd paketini yukler.
+      yum:
+        name: httpd
+        state: latest
+      when: ansible_distribution == "Rocky"
+
+    - name: Debian&Ubuntu apache2 icin php kutuphanesini yukler
+      apt:
+        name: libapache2-mod-php
+        state: latest
+      when: ansible_distribution == "Ubuntu"
+
+    - name: Redhat&Rocky httpd icin php kutuphanesini yukler
+      yum:
+        name: php
+        state: latest
+      when: ansible_distribution == "Rocky"

@@ -1,0 +1,7 @@
+# Ubuntu upgrade machines
+
+ansible all -m apt -a "upgrade=yes update_cache=yes cache_valid_time=86400"
+
+# Rocky upgrade machines
+
+ansible all -m yum -a "name='*' state=latest" --become -K

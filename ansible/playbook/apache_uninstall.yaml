@@ -1,20 +1,17 @@
 ---
 
-  - hosts: all
+  - hosts: ubuntu
     become: true
     tasks:
 
-    - name: apt-update calistirir
-      apt:
-        update_cache: yes
-        #cache_valid_time: 86400
-
-    - name: apache2 paketini kaldirir.
-      apt:
+    - name: apache2 paketini kaldirir
+      ansible.builtin.apt:
         name: apache2
         state: absent
-
+    
     - name: apache2 icin php kutuphanesini kaldirir.
-      apt:
+      ansible.builtin.apt:
         name: libapache2-mod-php
         state: absent
+
+    
